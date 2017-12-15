@@ -20,7 +20,7 @@ class Main : JavaPlugin() {
 
     override fun onEnable() {
         println("Hello world, I'm a plugin!")
-        server.pluginManager.registerEvents(MyListener(), this)
+        //server.pluginManager.registerEvents(MyListener(), this)
         this.getCommand("tpa").executor = TeleportCommands()
     }
 
