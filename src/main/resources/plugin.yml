@@ -1,0 +1,4 @@
+name: usbTeleport
+version: 0.0.1
+author: usbpc
+main: xyz.usbpc.mc.spigot.plugin.teleport.Main
