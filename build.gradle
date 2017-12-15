@@ -18,6 +18,12 @@ apply plugin: 'kotlin'
 group 'xyz.usbpc.mc.spigot.plugin'
 version '0.0.1'
 
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
+}
+
 repositories {
     maven {
         url "https://hub.spigotmc.org/nexus/content/groups/public"
@@ -28,6 +34,8 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT"
+
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.19.2"
 }
 
 compileKotlin {

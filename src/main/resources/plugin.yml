@@ -2,3 +2,8 @@ name: usbTeleport
 version: 0.0.1
 author: usbpc
 main: xyz.usbpc.mc.spigot.plugin.teleport.Main
+
+commands:
+  tpa:
+    description: Sends a teleport request to <User>
+    usage: /tpa <user>
