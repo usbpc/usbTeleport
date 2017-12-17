@@ -20,6 +20,7 @@ import org.bukkit.permissions.PermissionDefault
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.NoSuchElementException
 
 enum class Permissions(val permission: Permission) {
 
@@ -85,7 +86,11 @@ class TeleportCommands : CommandExecutor {
                     val request = if (args.size < 2) {
                         requests.first()
                     } else {
-                        requests.first {it.requester.uniqueId == UUID.fromString(args[1])}
+                        try {
+                            requests.first {it.requester.uniqueId == UUID.fromString(args[1])}
+                        } catch (ex: NoSuchElementException) {
+                            return true
+                        }
                     }
                     request.let {request ->
                         request.requester.teleport(sender, PlayerTeleportEvent.TeleportCause.COMMAND)
@@ -111,7 +116,11 @@ class TeleportCommands : CommandExecutor {
                     val request = if (args.size < 2) {
                         requests.first()
                     } else {
-                        requests.first {it.requester.uniqueId == UUID.fromString(args[1])}
+                        try {
+                            requests.first {it.requester.uniqueId == UUID.fromString(args[1])}
+                        } catch (ex: NoSuchElementException) {
+                            return true
+                        }
                     }
                     request.let {request ->
                         sender.sendMessage(
