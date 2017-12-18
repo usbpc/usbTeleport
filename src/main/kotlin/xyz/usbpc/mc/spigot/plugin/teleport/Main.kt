@@ -74,7 +74,7 @@ class TeleportCommands : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         //Only players are allowed to execute this command!
         if (sender !is Player) return false
-        if (args.isEmpty()) return true
+        if (args.isEmpty()) return false
         when (args[0]) {
             "accept" -> {
                 synchronized(activeRequests) {
