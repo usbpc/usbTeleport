@@ -9,12 +9,12 @@ pipeline {
   stages {
     stage('Init') {
       steps {
-        sh 'gradle clean'
+        sh 'gradle clean -Dorg.gradle.parallel=false -Dorg.gradle.daemon=false -Dkotlin.incremental=false'
       }
     }
     stage('Build') {
       steps {
-        sh 'gradle shadowJar -Dorg.gradle.parallel=false'
+        sh 'gradle shadowJar -Dorg.gradle.parallel=false -Dorg.gradle.daemon=false -Dkotlin.incremental=false'
       }
     }
     stage('Archive') {
