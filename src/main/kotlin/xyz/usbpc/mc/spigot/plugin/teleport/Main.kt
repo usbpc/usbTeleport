@@ -154,9 +154,9 @@ class TeleportCommands : CommandExecutor {
                         }
                     }
                 }
-                val requesterMessage = TextComponent(target.displayName).apply {
-                    color = ChatColor.YELLOW
-                    addExtra(TextComponent(", it will expire in 120 seconds.").apply {color = ChatColor.RESET})
+                val requesterMessage = TextComponent("A teleport request was send to ").apply {
+                    addExtra(TextComponent(target.displayName).apply {color = ChatColor.YELLOW})
+                    addExtra(TextComponent(", it will expire in 120 seconds."))
                 }
                 sender.spigot().sendMessage(requesterMessage)
                 val targetMessage = TextComponent("").apply {
