@@ -9,12 +9,12 @@ pipeline {
   stages {
     stage('Init') {
       steps {
-        sh 'gradle clean'
+        sh 'gradle clean --no-deamon'
       }
     }
     stage('Build') {
       steps {
-        sh 'gradle shadowJar'
+        sh 'gradle shadowJar --no-deamon -Dorg.gradle.parallel=false'
       }
     }
     stage('Archive') {
