@@ -22,6 +22,7 @@ apply plugin: 'java'
 
 group 'xyz.usbpc.mc.spigot.plugin'
 version "0.1.${System.getenv('BUILD_NUMBER')}"
+sourceCompatibility = 1.8
 
 kotlin {
     experimental {
@@ -37,8 +38,8 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.19.2"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.19.2"
 
     compileOnly "org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT"
 }
@@ -54,11 +55,7 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-task toPluginDir(dependsOn: 'shadowJar' , type: Copy) {
-    def file = new File("server/spigot.jar")
-    if (!file.exists()) {
-        dependsOn += ['runBuildTools']
-    }
+task toPluginDir(dependsOn: ['shadowJar', 'copyServerJar'] , type: Copy) {
     from 'build/libs/' + project.name + '-' + project.version + '-all.jar'
     rename {
         if (it == project.name + '-' + project.version + '-all.jar') {
@@ -71,6 +68,10 @@ task toPluginDir(dependsOn: 'shadowJar' , type: Copy) {
 }
 
 task copyServerJar(dependsOn: 'runBuildTools', type: Copy) {
+    def file = new File("server/spigot.jar")
+    if (!file.exists()) {
+        dependsOn += ['copyServerJar']
+    }
     from('spigotBuild/') {
         include 'spigot-*.jar'
     }
